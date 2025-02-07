@@ -17,13 +17,19 @@ public class input : MonoBehaviour
 
     private GameObject OBJ;
 
-    public GameObject Plane;
+    public GameObject Plane, CameraCenter;
 
-    Vector3 planeUp, planeDown;
+    Vector3 planeNew, CamNew;
     [SerializeField]
     Placementsys placementsys;
+    
+    public bool BuilingOn = false;
 
-
+    private void Start()
+    {
+        CamNew = CameraCenter.transform.position;
+        planeNew = Plane.transform.position;
+    }
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -39,10 +45,11 @@ public class input : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && BuilingOn)
         {
             placementsys.placeObj();
-        } else if (Input.GetKey(KeyCode.Mouse1))
+        } 
+        else if (Input.GetKey(KeyCode.Mouse1))
         {
             placementsys.DestroyOBJ();
         }
@@ -50,12 +57,20 @@ public class input : MonoBehaviour
         OBJ = null;
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0 )
         {
-            planeUp.y = Plane.transform.position.y + 1;
-            Plane.transform.position = planeUp;
+            planeNew.y = Plane.transform.position.y + 1;
+            Plane.transform.position = planeNew;
+            CamNew.y = CameraCenter.transform.position.y + 1;
+            CameraCenter.transform.position = CamNew;
         } else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0 )
         {
-            planeDown.y = Plane.transform.position.y - 1;
-            Plane.transform.position = planeDown;
+            planeNew.y = Plane.transform.position.y - 1;
+            Plane.transform.position = planeNew;
+            CamNew.y = CameraCenter.transform.position.y - 1;
+            CameraCenter.transform.position = CamNew;
+        } 
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+
         }
         
     }
@@ -66,10 +81,9 @@ public class input : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, DestroyMask))
         {
-            if (hit.collider.gameObject.tag == targetTag)
+            if (hit.collider.transform.parent.gameObject.tag == targetTag)
             {
-                Debug.Log("Hit");
-                OBJ = hit.collider.gameObject;
+                OBJ = hit.collider.transform.parent.gameObject;
             }
         }
         return OBJ;
