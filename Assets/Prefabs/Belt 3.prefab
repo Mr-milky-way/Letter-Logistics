@@ -114,6 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797036044021957823}
+  - component: {fileID: 8201916265704094927}
   m_Layer: 6
   m_Name: Belt 3
   m_TagString: Block
@@ -137,3 +138,16 @@ Transform:
   - {fileID: 7892959158355440891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8201916265704094927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500337328424806872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62ebe7d36fdf9c4ea80aea89f2df0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 4706393462261455920}

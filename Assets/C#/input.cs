@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class input : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class input : MonoBehaviour
 
     public GameObject Plane, CameraCenter;
 
-    Vector3 planeNew, CamNew;
+    public Vector3 planeNew, CamNew, CamR;
     [SerializeField]
     Placementsys placementsys;
     
@@ -48,8 +49,12 @@ public class input : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && BuilingOn)
         {
             placementsys.placeObj();
-        } 
-        else if (Input.GetKey(KeyCode.Mouse1))
+        } else if (Input.GetKeyDown(KeyCode.Mouse1) && BuilingOn)
+        {
+            BuilingOn = false;
+            placementsys.Builingsys.SetActive(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             placementsys.DestroyOBJ();
         }
@@ -70,9 +75,102 @@ public class input : MonoBehaviour
         } 
         else if (Input.GetKeyDown(KeyCode.E))
         {
-
+            CameraCenter.transform.Rotate(0, -90, 0);
+            CamR.y -= 90;
+            if (CamR.y == -360)
+            {
+                CamR.y = 0;
+            }
         }
-        
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CameraCenter.transform.Rotate(0,90,0);
+            CamR.y += 90;
+            if (CamR.y == 360)
+            {
+                CamR.y = 0;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (CamR.y == 90 || CamR.y == -270)
+            {
+                CamNew.x = CameraCenter.transform.position.x + 1;
+            }
+            else if (CamR.y == -90 || CamR.y == 270)
+            {
+                CamNew.x = CameraCenter.transform.position.x - 1;
+            }
+            else if (CamR.y == -180 || CamR.y == 180)
+            {
+                CamNew.z = CameraCenter.transform.position.z - 1;
+            }
+            else
+            {
+                CamNew.z = CameraCenter.transform.position.z + 1;
+            }
+            CameraCenter.transform.position = CamNew;
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (CamR.y == 90 || CamR.y == -270)
+            {
+                CamNew.x = CameraCenter.transform.position.x - 1;
+            }
+            else if (CamR.y == -90 || CamR.y == 270)
+            {
+                CamNew.x = CameraCenter.transform.position.x + 1;
+            }
+            else if (CamR.y == -180 || CamR.y == 180)
+            {
+                CamNew.z = CameraCenter.transform.position.z + 1;
+            }
+            else
+            {
+                CamNew.z = CameraCenter.transform.position.z - 1;
+            }
+            CameraCenter.transform.position = CamNew;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (CamR.y == 90 || CamR.y == -270)
+            {
+                CamNew.z = CameraCenter.transform.position.z + 1;
+            }
+            else if (CamR.y == -90 || CamR.y == 270)
+            {
+                CamNew.z = CameraCenter.transform.position.z - 1;
+            }
+            else if (CamR.y == -180 || CamR.y == 180)
+            {
+                CamNew.x = CameraCenter.transform.position.x + 1;
+            }
+            else
+            {
+                CamNew.x = CameraCenter.transform.position.x - 1;
+            }
+            CameraCenter.transform.position = CamNew;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (CamR.y == 90 || CamR.y == -270)
+            {
+                CamNew.z = CameraCenter.transform.position.z - 1;
+            }
+            else if (CamR.y == -90 || CamR.y == 270)
+            {
+                CamNew.z = CameraCenter.transform.position.z + 1;
+            }
+            else if (CamR.y == -180 || CamR.y == 180)
+            {
+                CamNew.x = CameraCenter.transform.position.x - 1;
+            }
+            else
+            {
+                CamNew.x = CameraCenter.transform.position.x + 1;
+            }
+            CameraCenter.transform.position = CamNew;
+        }
     }
 
     public GameObject GetOBJToRemove()
