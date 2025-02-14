@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Placementsys : MonoBehaviour
 {
-    
     public GameObject Builingsys;
+    [SerializeField]
+    private Money money;
 
     [SerializeField]
     private GameObject CellIndictor, Belt_1, Belt_3;
+    public string currOBJ;
 
     private GameObject PlaceOBJ;
     [SerializeField]
@@ -28,9 +30,12 @@ public class Placementsys : MonoBehaviour
     
     public void placeObj()
     {
-        Instantiate(PlaceOBJ, GridPos, Quaternion.identity);
-        input.BuilingOn = false;
-        Builingsys.SetActive(false);
+        if (!input.isRotating)
+        {
+            Instantiate(PlaceOBJ, GridPos, Quaternion.identity);
+            input.BuilingOn = false;
+            Builingsys.SetActive(false);
+        }
     }
 
     public void DestroyOBJ()
@@ -38,15 +43,33 @@ public class Placementsys : MonoBehaviour
         Destroy(input.GetOBJToRemove());
     }
 
-    public void Belt1 ()
+    public void Belt1()
     {
-        PlaceOBJ = Belt_1;
-        input.BuilingOn = true;
+        if (money.money >= 20)
+        {
+            PlaceOBJ = Belt_1;
+            input.BuilingOn = true;
+            money.money -= 20;
+            currOBJ = "1";
+        }
+        else
+        {
+            Builingsys.SetActive(false);
+        }
     }
 
     public void Belt3()
     {
-        PlaceOBJ = Belt_3;
-        input.BuilingOn = true;
+        if (money.money >= 50)
+        {
+            PlaceOBJ = Belt_3;
+            input.BuilingOn = true;
+            money.money -= 50;
+            currOBJ = "3";
+        }
+        else
+        {
+            Builingsys.SetActive(false);
+        }
     }
 }

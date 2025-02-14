@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7988525585619112262}
   - component: {fileID: 6321231805450729013}
   - component: {fileID: 8868292058512201441}
+  - component: {fileID: 3419394958693119272}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -91,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706393462261455920}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2122e245aadaf834fb63f13efc60c3f3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -105,6 +106,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3419394958693119272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706393462261455920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c2c257e37a1ee4f9eba503328d5f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+  direction: {x: 0, y: 0, z: 0}
+  OnBelt: []
 --- !u!1 &5500337328424806872
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,3 +167,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   child: {fileID: 4706393462261455920}
+  I: {fileID: 0}
+  input: {fileID: 0}
